@@ -22,7 +22,7 @@ jobs:
       - name: 💿 Install Requirements                             
         run: pip install -r reqs.txt
         
-      - name: 🍳 Scrape Federal Health
+      - name: 🍳 Scrape news sites
         run: python run_scrapers.py
         
       - name: 🚀 Commit and push if it changed
