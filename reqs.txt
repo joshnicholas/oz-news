@@ -1,7 +1,6 @@
 datetime
 requests
 pytz
-dateutil
 dateparser
 peewee
 bs4

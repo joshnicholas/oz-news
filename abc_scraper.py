@@ -8,7 +8,7 @@ import pytz
 import random
 import time
 
-from dateutil import parser
+# from dateutil import parser
 
 
 scrape_time = datetime.datetime.now().astimezone(pytz.timezone("Australia/Brisbane"))
