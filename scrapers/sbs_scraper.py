@@ -49,9 +49,9 @@ for story in stories[:12]:
 
     if urlo not in sent:
 
-        print(urlo)
+        # print(urlo)
         heado = story.h2.text.strip()
-        print(heado)
+        # print(heado)
 
         r2 = requests.get(urlo, headers=headers)
 
