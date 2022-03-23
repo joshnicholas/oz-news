@@ -40,7 +40,7 @@ sent = already_done("SBS")
 
 page_rank = 1
 for story in stories[:12]:
-    print("Starting: ", page_rank)
+    # print("Starting: ", page_rank)
     if 'sbs.com.au' not in story['href']:
 
         urlo = 'https://www.sbs.com.au' + story['href']
@@ -48,7 +48,7 @@ for story in stories[:12]:
         urlo = story['href']
 
     if urlo not in sent:
-
+        print("Starting: ", page_rank)
         # print(urlo)
         heado = story.h2.text.strip()
         # print(heado)

@@ -41,16 +41,15 @@ sent = already_done("The Guardian")
 
 page_rank = 1
 for story in stories[:20]:
-    print("Starting: ", page_rank)
     urlo = story.a['href']
     # print(urlo)
     heado = story.a.text
     # print(heado)
 
     if urlo not in sent:
-
-        print(urlo)
-        print(heado)
+        print("Starting: ", page_rank)
+        # print(urlo)
+        # print(heado)
 
         r2 = requests.get(urlo, headers=headers)
 

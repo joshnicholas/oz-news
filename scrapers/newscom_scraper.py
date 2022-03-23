@@ -9,13 +9,14 @@ import random
 import time
 
 # from dateutil import parser
+# import dateparser
 
 
 scrape_time = datetime.datetime.now().astimezone(pytz.timezone("Australia/Brisbane"))
 
 # %%
 
-starter = 'https://www.abc.net.au/news/'
+starter = 'https://www.news.com.au/national'
 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 r = requests.get(starter, headers=headers)
@@ -24,43 +25,42 @@ r = requests.get(starter, headers=headers)
 
 soup = bs(r.text, 'html.parser')
 
-box = soup.find('main', id = 'content')
-
-
-stories = box.find_all(attrs={'data-component': 'ListItem'})
+# stories = soup.find_all('article',attrs={'data-nca-asset-type': 'story'})
+stories = soup.find_all('article',class_='storyblock')
 
 print("Num stories: ", len(stories))
 
 # %%
 
-sent = already_done("ABC")
+sent = already_done("News")
+
+# print(stories[0])
 
 page_rank = 1
-for story in stories[:20]:
-
-    urlo = 'https://www.abc.net.au' + story.a['href']
-    heado = story.h3.text.strip()
+for story in stories[:10]:
+    # print("Starting: ", page_rank)
+    urlo = story.find("a", class_='storyblock_title_link')['href']
+    # print(urlo)
+    heado = story.h4.text
+    # print(heado)
 
     if urlo not in sent:
         print("Starting: ", page_rank)
+        # print(urlo)
+        # print(heado)
 
         r2 = requests.get(urlo, headers=headers)
 
         story_soup = bs(r2.text, 'html.parser')
 
-        story_body = story_soup.find('div', id = 'body')
+        body = story_soup.find('div', id = 'story-body')
 
-        # pub_time = story_body.find('time', attrs={'data-component': 'Timestamp'})
-        # pub_time = parser.parse(pub_time['datetime']).astimezone(pytz.timezone("Australia/Brisbane"))
+        body = body.getText()
 
-        pars = story_body.find_all('p')
-        pars = [x.text for x in pars]
+        # print(body)
 
-        body = ' '.join(pars)
+        dicto = {"publication": "News",
 
-        dicto = {"publication": "ABC",
-
-        # 'published_datetime': pub_time,
         'scraped_datetime': scrape_time,
 
         'headline': heado,
@@ -76,4 +76,8 @@ for story in stories[:20]:
 
     rando = 1 * random.random()
     time.sleep(rando)
-# %%
+# # # # %%
+
+# # # %%
+
+# # %%

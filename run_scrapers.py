@@ -13,3 +13,8 @@ time.sleep(1)
 
 print("\n\n Starting Graun \n\n")
 os.system(f'python3 scrapers/graun_scraper.py')
+
+time.sleep(1)
+
+print("\n\n Starting NewsCom \n\n")
+os.system(f'python3 scrapers/newscom_scraper.py')
