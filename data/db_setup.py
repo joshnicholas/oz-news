@@ -9,7 +9,7 @@ class Post(Model):
     scraped_datetime = DateTimeField()
 
     headline = CharField()
-    url = CharField(unique=True)
+    url = CharField()
     body = TextField()
 
     page_rank = IntegerField()
