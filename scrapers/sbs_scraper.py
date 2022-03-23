@@ -1,5 +1,5 @@
 # %%
-from functions import sender, already_done
+from functions import sender, already_done, remove_common
 import requests
 from bs4 import BeautifulSoup as bs
 import datetime
@@ -35,6 +35,7 @@ print("Num stories: ", len(stories))
 # %%
 
 sent = already_done("SBS")
+# sent = already_done("ABC")
 
 # print(stories[0])
 
@@ -66,6 +67,7 @@ for story in stories[:12]:
             body = story_soup.find('main', attrs={'role': 'main'})
 
         body = body.getText()
+        body = remove_common(body)
 
         # print(body)
 

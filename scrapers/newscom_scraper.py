@@ -1,5 +1,5 @@
 # %%
-from functions import sender, already_done
+from functions import sender, already_done, remove_common
 import requests
 from bs4 import BeautifulSoup as bs
 import datetime
@@ -33,6 +33,7 @@ print("Num stories: ", len(stories))
 # %%
 
 sent = already_done("News")
+# sent = already_done("The Guardian")
 
 # print(stories[0])
 
@@ -56,7 +57,7 @@ for story in stories[:10]:
         body = story_soup.find('div', id = 'story-body')
 
         body = body.getText()
-
+        body = remove_common(body)
         # print(body)
 
         dicto = {"publication": "News",

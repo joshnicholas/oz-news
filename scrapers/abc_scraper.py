@@ -1,5 +1,5 @@
 # %%
-from functions import sender, already_done
+from functions import sender, already_done, remove_common
 import requests
 from bs4 import BeautifulSoup as bs
 import datetime
@@ -57,7 +57,8 @@ for story in stories[:20]:
         pars = [x.text for x in pars]
 
         body = ' '.join(pars)
-
+        body = remove_common(body)
+        
         dicto = {"publication": "ABC",
 
         # 'published_datetime': pub_time,

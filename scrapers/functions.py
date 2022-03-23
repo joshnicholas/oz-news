@@ -1,4 +1,5 @@
 from peewee import *
+import re
 
 db = SqliteDatabase('data/news.db')
 
@@ -6,6 +7,7 @@ class Post(Model):
     publication = CharField()
 
     # published_datetime = DateTimeField()
+
     scraped_datetime = DateTimeField()
 
     headline = CharField()
@@ -47,3 +49,16 @@ def already_done(pubber):
         internal_list.append(urlo)
     
     return internal_list
+
+
+def remove_common(texto):
+    texto = texto.replace("Sign up to receive an email with the top stories from Guardian Australia every morning", ' ')
+    texto = texto.replace("Sign up to receive the top stories from Guardian Australia every morning", ' ')
+    texto = texto.replace("Read more", '')
+    texto = texto.replace("READ MORE", '')
+
+    texto = re.sub(r'\.(?!\s|$)', '. ', texto)
+    # texto = texto.replace(r'\b\.\b', '. ')
+    return texto
+
+    
