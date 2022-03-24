@@ -4,3 +4,4 @@ pytz
 dateparser
 peewee
 bs4
+pandas
