@@ -72,15 +72,15 @@ for story in stories[:10]:
     'page_rank': page_rank
     }
 
-senters = sender(dicto)
+    senters = sender(dicto)
 
-if senters == True:
-    counter += 1
+    if senters == True:
+        counter += 1
 
-page_rank += 1
+    page_rank += 1
 
-rando = 1 * random.random()
-time.sleep(rando)
+    rando = 1 * random.random()
+    time.sleep(rando)
 
 print("Num sent:", counter)
 
