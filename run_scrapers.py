@@ -18,3 +18,9 @@ time.sleep(1)
 
 print("\n\n Starting NewsCom \n\n")
 os.system(f'python3 scrapers/newscom_scraper.py')
+
+import pandas as pd
+log_path = 'data/scrape_log.csv'
+old_log = pd.read_csv(log_path)
+
+print(old_log)

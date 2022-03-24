@@ -33,11 +33,14 @@ def sender(objecto):
         body = objecto['body'],
 
         page_rank = objecto['page_rank'])
+    
+        return True
 
     except Exception as e:
         print(f"{objecto['headline']} was already in")
         print(e)
 
+        return False
 
 def already_done(pubber):
     internal_list = []

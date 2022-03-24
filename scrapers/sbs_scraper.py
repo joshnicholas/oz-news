@@ -34,10 +34,12 @@ print("Num stories: ", len(stories))
 
 # %%
 
-sent = already_done("SBS")
+# sent = already_done("SBS")
 # sent = already_done("ABC")
 
 # print(stories[0])
+
+counter = 0
 
 page_rank = 1
 for story in stories[:12]:
@@ -48,46 +50,70 @@ for story in stories[:12]:
     else:
         urlo = story['href']
 
-    if urlo not in sent:
-        print("Starting: ", page_rank)
-        # print(urlo)
-        heado = story.h2.text.strip()
-        # print(heado)
+    # if urlo not in sent:
+    # print("Starting: ", page_rank)
+    # print(urlo)
+    heado = story.h2.text.strip()
+    # print(heado)
 
-        r2 = requests.get(urlo, headers=headers)
+    r2 = requests.get(urlo, headers=headers)
 
-        story_soup = bs(r2.text, 'html.parser')
+    story_soup = bs(r2.text, 'html.parser')
 
-        body = story_soup.find('div', id = 'article-body-more')
-        
-        if body is None:
-            body = story_soup.find('div', class_='article__body column')
-        
-        if body is None:
-            body = story_soup.find('main', attrs={'role': 'main'})
+    body = story_soup.find('div', id = 'article-body-more')
+    
+    if body is None:
+        body = story_soup.find('div', class_='article__body column')
+    
+    if body is None:
+        body = story_soup.find('main', attrs={'role': 'main'})
 
-        body = body.getText()
-        body = remove_common(body)
+    body = body.getText()
+    body = remove_common(body)
 
-        # print(body)
+    # print(body)
 
-        dicto = {"publication": "SBS",
+    dicto = {"publication": "SBS",
 
-        'scraped_datetime': scrape_time,
+    'scraped_datetime': scrape_time,
 
-        'headline': heado,
-        'url': r2.url,
-        'body': body.strip(),
-        'page_rank': page_rank
-        }
+    'headline': heado,
+    'url': r2.url,
+    'body': body.strip(),
+    'page_rank': page_rank
+    }
 
-        sender(dicto)
-        # print(dicto)
+    senters = sender(dicto)
+
+    if senters == True:
+        counter += 1
 
     page_rank += 1
 
     rando = 1 * random.random()
     time.sleep(rando)
+
+print("Num sent:", counter)
+
+data = [{
+    "Time": scrape_time,
+    "Publication": "SBS",
+    "Sent": counter
+}]
+
+import pandas as pd
+log_path = 'data/scrape_log.csv'
+old = pd.read_csv(log_path)
+log = pd.DataFrame.from_records(data)
+
+new_log = old.append(log)
+
+
+with open(log_path, 'w') as f:
+    new_log.to_csv(f, index=False, header=True)
+
+# print(new_log)
+
 # # %%
 
 # %%
