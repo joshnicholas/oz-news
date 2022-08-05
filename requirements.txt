@@ -5,6 +5,6 @@ dateparser
 peewee
 bs4
 pandas
-git+https://github.com/twintproject/twint.git
+git+git+https://github.com/twintproject/twint.git@origin/master#egg=twint
 time
 random 
