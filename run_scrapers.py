@@ -24,6 +24,11 @@ time.sleep(1)
 print("\n\n Starting SMH \n\n")
 os.system(f'python3 scrapers/smh_scraper.py')
 
+time.sleep(1)
+
+print("\n\n Starting Tweeter \n\n")
+os.system(f'python3 tweeters.py')
+
 import pandas as pd
 log_path = 'data/scrape_log.csv'
 old_log = pd.read_csv(log_path)
