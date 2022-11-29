@@ -33,4 +33,18 @@ import pandas as pd
 log_path = 'data/scrape_log.csv'
 old_log = pd.read_csv(log_path)
 
+
+time.sleep(1)
+
+print("\n\n Starting Top stories \n\n")
+
+print("\n\n ABC Top \n\n")
+
+os.system(f'python3 top_scrapers/abc_top.py')
+
+time.sleep(1)
+
+print("\n\n Graun Top \n\n")
+os.system(f'python3 top_scrapers/graun_top.py')
+
 print(old_log)

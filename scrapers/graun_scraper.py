@@ -25,11 +25,13 @@ r = requests.get(starter, headers=headers)
 
 soup = bs(r.text, 'html.parser')
 
-box = soup.find('div', attrs={'data-id': 'au-alpha/news/regular-stories'})
+# box = soup.find('div', attrs={'data-id': 'au-alpha/news/regular-stories'})
+box = soup.find('div', attrs={'data-link-name': 'Front | /au'})
+# box = soup.find("div", class_='fc-container')
 
 # print(box)
 
-stories = box.find_all('div', class_='fc-item')
+stories = box.find_all('div', class_='fc-item__container')
 
 print("Num stories: ", len(stories))
 
@@ -42,11 +44,11 @@ print("Num stories: ", len(stories))
 counter = 0
 page_rank = 1
 
-for story in stories[:20]:
+for story in stories[:40]:
     urlo = story.a['href']
     # print(urlo)
-    heado = story.a.text
-    # print(heado)
+    heado = story.a.text.strip()
+    print(heado)
 
     # if urlo not in sent:
     print("Starting: ", page_rank)
@@ -96,7 +98,7 @@ log_path = 'data/scrape_log.csv'
 old = pd.read_csv(log_path)
 log = pd.DataFrame.from_records(data)
 
-new_log = old.append(log)
+new_log = pd.concat([old,log])
 
 
 with open(log_path, 'w') as f:
