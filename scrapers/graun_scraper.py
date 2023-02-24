@@ -18,7 +18,11 @@ scrape_time = datetime.datetime.now().astimezone(pytz.timezone("Australia/Brisba
 
 starter = 'https://www.theguardian.com/au'
 
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
+'Accept-Language': "en-GB,en-US;q=0.9,en;q=0.8",
+"Referer": 'https://www.google.com',
+"DNT":'1'}
+
 r = requests.get(starter, headers=headers)
 
 # %%
